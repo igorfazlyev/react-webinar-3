@@ -49,6 +49,7 @@ class Store {
    */
   addItem() {
     this.setState({
+      ...this.state,
       newItemId: this.state.newItemId+1,
       list: [...this.state.list, { code: this.state.newItemId, title: 'Новая запись' }],
     });
