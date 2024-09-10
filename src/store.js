@@ -2,7 +2,10 @@
  * Хранилище состояния приложения
  */
 class Store {
-  constructor(initState = {}) {
+  constructor(initState = {newItemId:1}) {
+    if (initState.list) {
+      initState.newItemId = initState.list.length + 1;
+    }
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -43,8 +46,8 @@ class Store {
    */
   addItem() {
     this.setState({
-      ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }],
+      newItemId: this.state.newItemId+1,
+      list: [...this.state.list, { code: this.state.newItemId, title: 'Новая запись' }],
     });
   }
 
@@ -69,6 +72,16 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          if (item.selected) {
+            if (item.timesSelected){
+              item.timesSelected += 1;
+            }else{
+              item.timesSelected = 1;
+            }
+          }
+          
+        }else{
+          item.selected = false;
         }
         return item;
       }),
