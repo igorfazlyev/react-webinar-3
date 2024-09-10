@@ -4,6 +4,9 @@
 class Store {
   constructor(initState = {newItemId:1}) {
     if (initState.list) {
+      initState.list.forEach((item, ind)=>{
+        item.code = ind+1;
+      });
       initState.newItemId = initState.list.length + 1;
     }
     this.state = initState;
