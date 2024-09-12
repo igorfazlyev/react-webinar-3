@@ -9,7 +9,12 @@ import './styles.css';
  */
 function App({ store }) {
   const list = store.getState().list;
-
+  const timesForm = (num) =>{
+    if (num>4 && num < 22) {
+      return 'раз';
+    }
+    return [2, 3, 4].includes(num % 10)?'раза':'раз';
+  }
   return (
     <div className="App">
       <div className="App-head">
@@ -27,7 +32,7 @@ function App({ store }) {
                 onClick={() => store.selectItem(item.code)}
               >
                 <div className="Item-code">{item.code}</div>
-                <div className="Item-title">{item.title} {item.timesSelected && `(Выделяли ${item.timesSelected} раз)`}</div>
+                <div className="Item-title">{item.title} {item.timesSelected && `| Выделяли ${item.timesSelected} ${timesForm(item.timesSelected)}`}</div>
                 <div className="Item-actions">
                   <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
                 </div>
