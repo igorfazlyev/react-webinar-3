@@ -10,10 +10,7 @@ import './styles.css';
 function App({ store }) {
   const list = store.getState().list;
   const timesForm = (num) =>{
-    if (num>4 && num < 22) {
-      return 'раз';
-    }
-    return [2, 3, 4].includes(num % 10)?'раза':'раз';
+    return [2, 3, 4].includes(num % 10) && (num<12 || num >14) ?'раза':'раз';
   }
   return (
     <div className="App">
