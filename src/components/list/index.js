@@ -4,7 +4,6 @@ import Item from '../item';
 import './style.css';
 
 function List({ list, onClickItemButton = () => {} }) {
-  console.log(onClickItemButton);
   return (
     <div className="List">
       {list.map(item => (
