@@ -41,27 +41,54 @@ class Store {
   }
 
   /**
-   * Добавление новой записи
+   * Add item to cart
    */
-  addItem() {
-    this.setState({
-      ...this.state,
-      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }],
-    });
-  }
+  //addItem(code) {
+  //  this.setState({
+  //    ...this.state,
+  //list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }],
+  //    cart:[...this.state.cart]
+  //  });
+  //}
 
   /**
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
-    this.setState({
-      ...this.state,
-      // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code),
-    });
+  //deleteItem(code) {
+  //  this.setState({
+  //    ...this.state,
+  // Новый список, в котором не будет удаляемой записи
+  //    list: this.state.list.filter(item => item.code !== code),
+  //  });
+  //}
+
+  addItemToCart(code) {
+    //alert(code);
+    const itemInList = this.state.list.find(item => item.code === code);
+    const { title, price } = itemInList;
+    let quantity = 1;
+    let total = itemInList.price;
+    if (itemInList) {
+      let itemInCart = this.state.cart.find(item => item.code === code);
+      if (itemInCart) {
+        quantity += itemInCart.quantity;
+        total = itemInList.price * quantity;
+        this.deleteItemFromCart(code);
+      }
+      return this.setState({
+        ...this.state,
+        cart: [...this.state.cart, { code, title, price, quantity, total }],
+      });
+    }
   }
 
+  deleteItemFromCart(code) {
+    this.setState({
+      ...this.state,
+      cart: this.state.cart.filter(item => item.code !== code),
+    });
+  }
   /**
    * Выделение записи по коду
    * @param code

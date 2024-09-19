@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
+import CartContents from '../cart-contents';
 
-function Controls({ onAdd }) {
+function Controls({ cart, onAdd }) {
   return (
     <div className="Controls">
-      <button onClick={() => onAdd()}>Добавить</button>
+      <span>
+        <CartContents cart={cart} />
+      </span>
+      <button onClick={() => onAdd()}>Перейти</button>
     </div>
   );
 }

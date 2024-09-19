@@ -1,0 +1,9 @@
+.Contents {
+  padding: 20px 10px 20px 20px;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.price-quantity{
+  font-weight: bold;
+}
