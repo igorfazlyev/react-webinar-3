@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
@@ -11,8 +11,20 @@ import Cart from './components/cart';
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const list = store.getState().list;
-  const cart = store.getState().cart;
+  const [state, setState] = useState(store.getState());
+
+  useEffect(() => {
+    // Subscribe to store updates
+    const unsubscribe = store.subscribe(() => {
+      // Update local state when the store changes
+      setState(store.getState());
+    });
+
+    // Cleanup subscription on component unmount
+    return () => {
+      unsubscribe();
+    };
+  }, [store]);
 
   const callbacks = {
     onOpenCart: useCallback(() => {
@@ -34,18 +46,19 @@ function App({ store }) {
       [store],
     ),
   };
-  console.log('cart showing:', store.cartShowing);
+  const { list, cart, cartShowing } = state;
+  //console.log(callbacks.onCloseCart);
   return (
     <PageLayout>
       <Head title="Магазин" />
       <Controls onOpenCart={callbacks.onOpenCart} cart={cart} />
       <List list={list} onClickItemButton={callbacks.onAddToCart} />
-      {store.cartShowing && (
+      {cartShowing && (
         <Cart
           cart={cart}
-          OnDeleteItemFromCart={callbacks.onDeleteItemFromCart}
-          isVisible={store.cartShowing}
-          OnCloseCart={callbacks.onCloseCart}
+          onDeleteItemFromCart={callbacks.onDeleteItemFromCart}
+          isVisible={cartShowing}
+          onCloseCart={callbacks.onCloseCart}
         />
       )}
     </PageLayout>

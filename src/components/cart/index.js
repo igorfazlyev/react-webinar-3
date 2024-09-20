@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './style.css';
 import Head from '../head';
 import List from '../list';
 
-function Cart({ cart, OnDeleteItemFromCart, isVisible, OnCloseCart }) {
-  console.log(isVisible);
+function Cart({ cart, onDeleteItemFromCart, isVisible, onCloseCart }) {
   const sum = 100;
   return (
     <div className={isVisible ? 'Cart-container Cart-container_visible' : 'Cart-container '}>
       <div className="Cart">
-        <Head title="Корзина" showingCart={true} onCloseCart={OnCloseCart} />
-        <List list={cart} onClickItemButton={OnDeleteItemFromCart} />
+        <Head title="Корзина" showingCart={true} onCloseCart={onCloseCart} />
+        <List list={cart} buttonName={'Удалить'} onClickItemButton={onDeleteItemFromCart} />
         <div className="Cart-total">
           <div className="Cart-totalText">Итого</div>
           <div className="Cart-totalSum">{`${sum} ₽`}</div>

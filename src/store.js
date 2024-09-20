@@ -68,6 +68,7 @@ class Store {
   }
 
   hideCart() {
+    console.log('hiding cart');
     this.setState({
       ...this.state,
       cartShowing: false,
@@ -75,7 +76,7 @@ class Store {
   }
 
   showCart() {
-    console.log('this is firing');
+    //console.log('this is firing');
     this.setState({
       ...this.state,
       cartShowing: true,

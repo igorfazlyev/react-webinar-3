@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Item from '../item';
 import './style.css';
 
-function List({ list, onClickItemButton = () => {} }) {
+function List(props) {
+  const { list, onClickItemButton = () => {}, buttonName = 'Добавить' } = props;
   return (
     <div className="List">
       {list.map(item => (
         <div key={item.code} className="List-item">
-          <Item item={item} onButtonClick={onClickItemButton} buttonName="Добавить" />
+          <Item item={item} onButtonClick={onClickItemButton} buttonName={buttonName} />
         </div>
       ))}
     </div>
