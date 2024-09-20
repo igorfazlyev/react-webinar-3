@@ -34,13 +34,4 @@ function Item(props) {
   );
 }
 
-Item.propTypes = {
-  item: PropTypes.shape({
-    code: PropTypes.number,
-    title: PropTypes.string,
-    buttonName: PropTypes.string,
-  }).isRequired,
-  onButtonClick: PropTypes.func,
-};
-
 export default React.memo(Item);
