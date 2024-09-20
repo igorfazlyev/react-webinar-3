@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function Head({ title, showingCart = false, onCloseCart = () => {} }) {
+function Head(props) {
+  const { title, showingCart = false, onCloseCart = () => {} } = props;
   const callbacks = {
     onCloseCart: () => {
       onCloseCart();

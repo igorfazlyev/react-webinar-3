@@ -3,7 +3,8 @@ import './style.css';
 import Head from '../head';
 import List from '../list';
 
-function Cart({ cart, onDeleteItemFromCart, isVisible, onCloseCart }) {
+function Cart(props) {
+  const { cart, onDeleteItemFromCart, isVisible, onCloseCart } = props;
   const sum = cart.reduce((sumTotal, item) => sumTotal + item.total, 0);
   return (
     <div className={isVisible ? 'Cart-container Cart-container_visible' : 'Cart-container '}>
@@ -16,8 +17,7 @@ function Cart({ cart, onDeleteItemFromCart, isVisible, onCloseCart }) {
           showingCart={true}
         />
         <div className="Cart-total">
-          <div className="Cart-totalText">Итого:</div>
-          <div className="Cart-totalSum">{` ${sum} ₽`}</div>
+          <div className="Cart-totalText">Итого:{` ${sum} ₽`}</div>
         </div>
       </div>
     </div>

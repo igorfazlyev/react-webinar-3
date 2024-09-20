@@ -3,7 +3,8 @@ import React from 'react';
 import { plural } from '../../utils';
 import './style.css';
 
-function CartContents({ cart }) {
+function CartContents(props) {
+  const { cart } = props;
   const numOfItems = cart.length;
   const totalPrice = cart.reduce((sumTotal, item) => sumTotal + item.total, 0);
   const numOfItemsString = plural(numOfItems, {
