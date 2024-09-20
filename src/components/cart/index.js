@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import Head from '../head';
 import List from '../list';
+import Item from '../item';
 
 function Cart(props) {
   const { cart, onDeleteItemFromCart, isVisible, onCloseCart } = props;
@@ -17,7 +18,8 @@ function Cart(props) {
           showingCart={true}
         />
         <div className="Cart-total">
-          <div className="Cart-totalText">Итого:{` ${sum} ₽`}</div>
+          <div className="Cart-totalText">Итого:</div>
+          <Item item={{ code: '', price: sum }} displayingListItem={false} />
         </div>
       </div>
     </div>
