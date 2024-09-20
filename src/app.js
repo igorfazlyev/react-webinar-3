@@ -3,6 +3,7 @@ import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
+import Cart from './components/cart';
 
 /**
  * Приложение
@@ -14,19 +15,39 @@ function App({ store }) {
   const cart = store.getState().cart;
 
   const callbacks = {
+    onOpenCart: useCallback(() => {
+      store.showCart();
+    }, [store]),
+    onCloseCart: useCallback(() => {
+      store.hideCart();
+    }, [store]),
     onAddToCart: useCallback(
       code => {
         store.addItemToCart(code);
       },
       [store],
     ),
+    onDeleteItemFromCart: useCallback(
+      code => {
+        store.deleteItemFromCart(code);
+      },
+      [store],
+    ),
   };
-
+  console.log('cart showing:', store.cartShowing);
   return (
     <PageLayout>
       <Head title="Магазин" />
-      <Controls onAdd={callbacks.onAddItem} cart={cart} />
+      <Controls onOpenCart={callbacks.onOpenCart} cart={cart} />
       <List list={list} onClickItemButton={callbacks.onAddToCart} />
+      {store.cartShowing && (
+        <Cart
+          cart={cart}
+          OnDeleteItemFromCart={callbacks.onDeleteItemFromCart}
+          isVisible={store.cartShowing}
+          OnCloseCart={callbacks.onCloseCart}
+        />
+      )}
     </PageLayout>
   );
 }

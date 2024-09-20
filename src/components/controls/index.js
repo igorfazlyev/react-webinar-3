@@ -3,23 +3,19 @@ import PropTypes from 'prop-types';
 import './style.css';
 import CartContents from '../cart-contents';
 
-function Controls({ cart, onAdd }) {
+function Controls({ cart, onOpenCart }) {
   return (
     <div className="Controls">
       <span>
         <CartContents cart={cart} />
       </span>
-      <button onClick={() => onAdd()}>Перейти</button>
+      <button onClick={() => onOpenCart()}>Перейти</button>
     </div>
   );
 }
 
 Controls.propTypes = {
   onAdd: PropTypes.func,
-};
-
-Controls.defaultProps = {
-  onAdd: () => {},
 };
 
 export default React.memo(Controls);

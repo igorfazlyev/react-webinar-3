@@ -15,9 +15,9 @@ const store = new Store({
     { code: generateCode(), title: 'Товар сюрприз', price: 0 },
   ],
   cart: [], //{code, title, price, quantity, total}?
+  cartShowing: false,
 });
 
-console.log(store);
 const root = createRoot(document.getElementById('root'));
 
 store.subscribe(() => {

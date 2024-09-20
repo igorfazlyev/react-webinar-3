@@ -2,10 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function Head({ title }) {
+function Head({ title, showingCart = false, onCloseCart = () => {} }) {
+  const callbacks = {
+    onCloseCart: () => {
+      onCloseCart();
+    },
+  };
   return (
     <div className="Head">
       <h1>{title}</h1>
+      <div className="Head-actions">
+        {showingCart ? <button onClick={callbacks.onCloseCart}>Закрыть</button> : ''}
+      </div>
     </div>
   );
 }

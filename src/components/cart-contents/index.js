@@ -11,13 +11,13 @@ function CartContents({ cart }) {
     few: 'товара',
     many: 'товаров',
   });
-
+  const whatsInTheBox =
+    numOfItems > 0
+      ? `${numOfItems} ${numOfItemsString} / ${Number(totalPrice).toLocaleString('ru')} ₽`
+      : ' пусто ';
   return (
     <span className="Contents">
-      В корзине:{' '}
-      <span className="price-quantity">
-        {numOfItems} {numOfItemsString} / {Number(totalPrice).toLocaleString('ru')} ₽
-      </span>
+      В корзине: <span className="price-quantity">{whatsInTheBox}</span>
     </span>
   );
 }

@@ -1,0 +1,34 @@
+.Cart-container {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color:rgba(112, 109, 109, 0.4);
+    display: none;
+}
+
+.Cart {
+    padding: 100px;
+    background-color: white;
+    width: 500px;
+}
+
+.Cart-container_visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Cart-total {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    align-items: center;
+}
+
+
+
+.Cart-total {
+    padding: 20px 100px 20px 20px;
+}
