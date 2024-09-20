@@ -4,15 +4,20 @@ import Head from '../head';
 import List from '../list';
 
 function Cart({ cart, onDeleteItemFromCart, isVisible, onCloseCart }) {
-  const sum = 100;
+  const sum = cart.reduce((sumTotal, item) => sumTotal + item.total, 0);
   return (
     <div className={isVisible ? 'Cart-container Cart-container_visible' : 'Cart-container '}>
       <div className="Cart">
         <Head title="Корзина" showingCart={true} onCloseCart={onCloseCart} />
-        <List list={cart} buttonName={'Удалить'} onClickItemButton={onDeleteItemFromCart} />
+        <List
+          list={cart}
+          buttonName={'Удалить'}
+          onClickItemButton={onDeleteItemFromCart}
+          showingCart={true}
+        />
         <div className="Cart-total">
-          <div className="Cart-totalText">Итого</div>
-          <div className="Cart-totalSum">{`${sum} ₽`}</div>
+          <div className="Cart-totalText">Итого:</div>
+          <div className="Cart-totalSum">{` ${sum} ₽`}</div>
         </div>
       </div>
     </div>

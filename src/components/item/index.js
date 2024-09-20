@@ -6,6 +6,7 @@ import './style.css';
 function Item(props) {
   const { onButtonClick = () => {} } = props;
   const { buttonName = 'Добавить' } = props;
+  const { showingCart = false } = props;
 
   const callbacks = {
     onClick: e => {
@@ -19,6 +20,7 @@ function Item(props) {
       <div className="Item-code">{props.item.code}</div>
       <div className="Item-title">{props.item.title} </div>
       <div className="Item-price">{Number(props.item.price).toLocaleString('ru')} ₽</div>
+      {showingCart && <div className="Item-price"> {`${props.item.quantity} шт`}</div>}
       <div className="Item-actions">
         <button onClick={callbacks.onClick}>{buttonName}</button>
       </div>
