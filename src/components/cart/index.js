@@ -7,6 +7,7 @@ import Item from '../item';
 function Cart(props) {
   const { cart, onDeleteItemFromCart, isVisible, onCloseCart } = props;
   const sum = cart.reduce((sumTotal, item) => sumTotal + item.total, 0);
+
   return (
     <div className={isVisible ? 'Cart-container Cart-container_visible' : 'Cart-container '}>
       <div className="Cart">
