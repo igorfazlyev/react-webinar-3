@@ -15,7 +15,11 @@ function Controls({ cart, onOpenCart }) {
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func,
+  cart: PropTypes.shape({
+    itemsInCart: PropTypes.number.isRequired,
+    totalCartPrice: PropTypes.number.isRequired,
+  }).isRequired,
+  onOpenCart: PropTypes.func.isRequired,
 };
 
 export default React.memo(Controls);

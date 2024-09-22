@@ -34,6 +34,8 @@ List.propTypes = {
     }),
   ).isRequired,
   onClickItemButton: PropTypes.func,
+  buttonName: PropTypes.string,
+  showingCart: PropTypes.bool,
 };
 
 export default React.memo(List);

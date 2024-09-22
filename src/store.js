@@ -41,34 +41,54 @@ class Store {
   }
 
   addItemToCart(code) {
-    //alert(code);
-    const itemInList = this.state.list.find(item => item.code === code);
-    const { title, price } = itemInList;
-    let quantity = 1;
-    let total = itemInList.price;
-    if (itemInList) {
-      let itemInCart = this.state.cart.find(item => item.code === code);
+    const pickedItem = this.state.list.find(item => item.code === code);
+    if (pickedItem) {
+      const { title, price } = pickedItem;
+      const newItem = {
+        code,
+        title,
+        price,
+        quantity: 1,
+        total: price,
+      };
+      const itemInCart = this.state.cart.items.find(item => item.code === code);
       if (itemInCart) {
-        quantity += itemInCart.quantity;
-        total = itemInList.price * quantity;
+        newItem.quantity += itemInCart.quantity;
+        newItem.total += itemInCart.total;
         this.deleteItemFromCart(code);
       }
-      return this.setState({
+      const newItems = [...this.state.cart.items, newItem];
+      let newTotalCartPrice = 0;
+      for (let item of newItems) {
+        newTotalCartPrice += item.total;
+      }
+
+      this.setState({
         ...this.state,
-        cart: [...this.state.cart, { code, title, price, quantity, total }],
+        cart: {
+          itemsInCart: newItems.length,
+          totalCartPrice: newTotalCartPrice,
+          items: newItems,
+        },
       });
     }
   }
 
   deleteItemFromCart(code) {
+    const newItems = this.state.cart.items.filter(item => item.code !== code);
+    const newItemsInCart = newItems.length;
+    const newTotalCartPrice = newItems.reduce((sumTotal, item) => sumTotal + item.total, 0);
     this.setState({
       ...this.state,
-      cart: this.state.cart.filter(item => item.code !== code),
+      cart: {
+        itemsInCart: newItemsInCart,
+        totalCartPrice: newTotalCartPrice,
+        items: newItems,
+      },
     });
   }
 
   hideCart() {
-    console.log('hiding cart');
     this.setState({
       ...this.state,
       cartShowing: false,

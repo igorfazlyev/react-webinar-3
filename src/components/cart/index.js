@@ -3,17 +3,19 @@ import './style.css';
 import Head from '../head';
 import List from '../list';
 import Item from '../item';
+import PropTypes from 'prop-types';
+import ModalLayout from '../modal-layout';
 
 function Cart(props) {
-  const { cart, onDeleteItemFromCart, isVisible, onCloseCart } = props;
-  const sum = cart.reduce((sumTotal, item) => sumTotal + item.total, 0);
+  const { cart, onDeleteItemFromCart, isVisible = false, onCloseCart } = props;
+  const sum = cart.totalCartPrice;
 
   return (
-    <div className={isVisible ? 'Cart-container Cart-container_visible' : 'Cart-container '}>
+    <ModalLayout isVisible>
       <div className="Cart">
         <Head title="Корзина" showingCart={true} onCloseCart={onCloseCart} />
         <List
-          list={cart}
+          list={cart.items}
           buttonName={'Удалить'}
           onClickItemButton={onDeleteItemFromCart}
           showingCart={true}
@@ -23,8 +25,25 @@ function Cart(props) {
           <Item item={{ code: '', price: sum }} displayingListItem={false} />
         </div>
       </div>
-    </div>
+    </ModalLayout>
   );
 }
 
+Cart.propTypes = {
+  cart: PropTypes.shape({
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        code: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        title: PropTypes.string,
+        total: PropTypes.number.isRequired,
+        quantity: PropTypes.number,
+      }),
+    ).isRequired,
+    totalCartPrice: PropTypes.number.isRequired,
+  }).isRequired,
+
+  onDeleteItemFromCart: PropTypes.func.isRequired,
+  isVisible: PropTypes.bool,
+  onCloseCart: PropTypes.func.isRequired, // Function to close the cart modal, required
+};
 export default React.memo(Cart);
