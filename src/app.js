@@ -47,7 +47,7 @@ function App({ store }) {
     ),
   };
   const { list, cart, cartShowing } = state;
-  //console.log(callbacks.onCloseCart);
+
   return (
     <PageLayout>
       <Head title="Магазин" />
